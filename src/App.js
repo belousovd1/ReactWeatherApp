@@ -7,12 +7,10 @@ const api = {
   key: "5cda9dc4110bc6d50564701b260ba81e",
   base: "https://api.openweathermap.org/data/2.5/"
 }
-const searchBox = document.querySelector('.search-boz')
-
 
 const App = () => {
 
-  const [city, setCity] = useState("")
+let city = ""
 
 const getResults = (city) =>{
     const getWeather = async () => {
@@ -24,14 +22,12 @@ const getResults = (city) =>{
       console.log(err)
       }
     }
-
     return getWeather()
-  
 }
 
   const keyHandler = (event) => {
     if (event.code === "Enter"){
-      setCity(event.target.value)
+      city = event.target.value
       console.log(city)
       getResults(city)
     } 
