@@ -37,7 +37,6 @@ const App = () => {
     const getWeather = async () => {
       try {
         const response = await axios.get(`${api.base}weather?q=${city}&units=imperial&appid=${api.key}`)
-        console.log(response.data)
         return response.data
       } catch (err) {
         console.log(err)
@@ -47,21 +46,19 @@ const App = () => {
   }
 
   const updateInfo = (weatherJSON) =>{ 
-    console.log(weatherJSON, "weatherJSON")
     setCountry(weatherJSON.sys.country)
     setCity(weatherJSON.name)
     let now = new Date()
     setDate(dateBuilder(now))
-    setTemperature(weatherJSON.main.temp)
+    setTemperature(Math.round(weatherJSON.main.temp))
     setWeather(weatherJSON.weather[0].main)
-    setHiTemp(weatherJSON.main.temp_max)
-    setLowTemp(weatherJSON.main.temp_min)
+    setHiTemp(Math.round(weatherJSON.main.temp_max))
+    setLowTemp(Math.round(weatherJSON.main.temp_min))
   }
 
   const keyHandler = async (event) => {
     if (event.code === "Enter") {
       input = event.target.value
-      console.log(input)
       const weather = await getResults(input)
       updateInfo(weather)
     }
@@ -83,9 +80,9 @@ const App = () => {
           <div className="date">{date}</div>
         </section>
         <div className="current">
-          <div className="temp">{temperature}, <span>°f</span></div>
+          <div className="temp">{temperature} <span>°f</span></div>
           <div className="weather">{weather}</div>
-          <div className="hi-low">{HiTemp}-{LowTemp}</div>
+          <div className="hi-low">{HiTemp}- {LowTemp}</div>
         </div>
       </main>
     </div>
