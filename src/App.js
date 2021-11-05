@@ -65,7 +65,7 @@ const App = () => {
   }
 
   return (
-    <div className="app-wrap" style={{ backgroundImage: `url(${background})` }}>
+    <div className="app-wrap">
       <header>
         <input type="text"
           autoComplete="off"
